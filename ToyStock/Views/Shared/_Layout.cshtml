@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Toy Stock</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .agile_short_dropdown {
+            border-radius: 0;
+            background: #ffffff;
+            text-align: center;
+            padding: 0;
+            border: none;
+        }
+
+            .agile_short_dropdown li a {
+                text-transform: uppercase;
+                color: #212121;
+                font-size: 12px;
+                font-weight: 500;
+                padding: .8em 0;
+                border-bottom: 1px solid #ececef;
+            }
+
+            .agile_short_dropdown > li > a:hover {
+                color: #212121;
+                text-decoration: none;
+                background-color: #0094ff;
+            }
+
+        .navbar-nav .open .dropdown-menu {
+            background-color: #ffffff;
+            padding: 10px 0;
+        }
+
+        .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li>@Html.ActionLink("Products", "Index", "Products")</li>
+                                <li>@Html.ActionLink("Orders", "Index", "Orders")</li>
+                                <li>@Html.ActionLink("Finished Orders", "Finished", "Orders")</li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle hvr-underline-from-center" style="font-size:16px" data-toggle="dropdown">@User.Identity.Name<b class="fa fa-caret-down"></b></a>
+                                    <ul class="dropdown-menu agile_short_dropdown">
+                                        <li class="f" style="font-size:16px">@Html.ActionLink("Admins", "Index", "Admins")</li>
+                                        <li class="f" style="font-size:16px">@Html.ActionLink("Sign Out", "LogOut", "Auth")</li>
+                                    </ul>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>@Html.ActionLink("Toy Stock Admin Control Panel", "Login", "Auth")</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,71 @@
+﻿@model ToyStock.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Code)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+</div>
+<table class="table">
+    <tr>
+
+        <th>
+           Photo
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Directory.GetFiles(Server.MapPath("~/Uploads"), Model.ID + "IMG*"))
+    {
+        string src = Path.GetFileName(item);
+        <tr>
+            <td>
+                <img src="~/Uploads/@src" style="width:100px;height:100px;border-radius:30%" alt="" /> 
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "DeletePhoto", new { path = item })
+            </td>
+        </tr>
+    }
+
+</table>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
